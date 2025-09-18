@@ -1,0 +1,18 @@
+:host {
+  background-color: blue;
+}
+
+form{
+  max-width: 400px;
+}
+
+app-form-state-view-component{
+
+}
+
+#container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}

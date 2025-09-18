@@ -1,0 +1,17 @@
+<table [formGroup]="form">
+  <tr>
+    <td>Power 1</td>
+    <td><input formControlName="power1"></td>
+    <td>{{form.controls.power1.valid ?  "OK" : "FAIL"}}</td>
+  </tr>
+  <tr>
+    <td>Power 2</td>
+    <td><input formControlName="power2"></td>
+    <td>{{form.controls.power2.valid ?  "OK" : "FAIL"}}</td>
+  </tr>
+  <tr>
+    <td>Power 3</td>
+    <td><input formControlName="power3"></td>
+    <td>{{form.controls.power3.valid ?  "OK" : "FAIL"}}</td>
+  </tr>
+</table>

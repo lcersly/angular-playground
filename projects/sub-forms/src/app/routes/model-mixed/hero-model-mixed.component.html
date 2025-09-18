@@ -1,0 +1,45 @@
+<div id="container">
+  <div>
+    <kirby-section-header>
+      <kirby-label>
+        <h3 heading>Form</h3>
+      </kirby-label>
+    </kirby-section-header>
+    <form [formGroup]="heroForm" class="kirby-grid">
+      <div class="kirby-grid-item" data-xs="12">
+        <kirby-card [hasPadding]="true">
+          <kirby-card-header>Hero</kirby-card-header>
+
+          <input
+            formControlName="heroName"
+            type="text"
+            placeholder="Hero name"
+          />
+          <input formControlName="aka" type="text" placeholder="AKA"/>
+
+        </kirby-card>
+      </div>
+
+      <div class="kirby-grid-item" data-xs="12">
+        <kirby-card [hasPadding]="true">
+          <kirby-card-header>Super Power</kirby-card-header>
+          <app-powers-mixed-component [(value)]="powersValue" (valid)="powersValid.set($event)"/>
+        </kirby-card>
+      </div>
+
+    </form>
+  </div>
+
+  <div>
+    <kirby-section-header>
+      <kirby-label>
+        <h3 heading>Preview</h3>
+      </kirby-label>
+    </kirby-section-header>
+    <app-form-state-view-component [form]="heroForm">
+      <h4>Power signals</h4>
+      <pre>{{ powersValue() | json }}</pre>
+      <span>{{ powersValid() ? "VALID" : "INVALID" }}</span>
+    </app-form-state-view-component>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<kirby-card [hasPadding]="true">
+  <h4>Form value</h4>
+  <pre>{{ form().value | json }}</pre>
+
+  <h4>Form state</h4>
+  <table>
+    <tr>
+      <td>Valid</td>
+      <td>{{ form().valid }}</td>
+    </tr>
+    <tr>
+      <td>Touched</td>
+      <td>{{ form().touched }}</td>
+    </tr>
+    <tr>
+      <td>Dirty</td>
+      <td>{{ form().dirty }}</td>
+    </tr>
+  </table>
+
+  <h4>Recursive validation errors</h4>
+  <pre>{{ errors() | json }}</pre>
+
+  <ng-content></ng-content>
+</kirby-card>

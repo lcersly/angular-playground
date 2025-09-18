@@ -27,6 +27,11 @@
               {
                 "glob": "**/*",
                 "input": "projects/sub-forms/public"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/@kirbydesign/designsystem/icons/svg",
+                "output": "./assets/kirby/icons/svg"
               }
             ],
             "styles": [
