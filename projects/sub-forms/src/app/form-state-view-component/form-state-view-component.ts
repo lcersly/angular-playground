@@ -1,4 +1,4 @@
-import {Component, input, Input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors} from '@angular/forms';
 import {JsonPipe} from '@angular/common';
 import {CardModule} from '@kirbydesign/designsystem';

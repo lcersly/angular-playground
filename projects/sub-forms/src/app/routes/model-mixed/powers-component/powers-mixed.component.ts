@@ -1,5 +1,5 @@
 import {Component, effect, inject, model, OnInit, output} from '@angular/core';
-import {FormControl, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, Validators} from '@angular/forms';
+import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 
 export type PowerType = Partial<{
   power1: string

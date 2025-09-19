@@ -26,7 +26,7 @@
 
           <app-powers-form-component
             [value]="heroForm.value.powers ?? {}"
-            (valueChange)="heroForm.controls.powers.patchValue($event ?? {})"
+            (valueChange)="heroForm.controls.powers.patchValue($event)"
             (valid)="heroForm.controls.powers.setErrors($event ?null:{'someError': true})"
           />
         </kirby-card>

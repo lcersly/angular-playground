@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PowersMixedComponent } from './powers-mixed.component';
+import {PowersMixedComponent} from './powers-mixed.component';
 
 describe('PowersComponent', () => {
   let component: PowersMixedComponent;

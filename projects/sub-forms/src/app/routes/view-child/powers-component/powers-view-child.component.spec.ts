@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PowersViewChildComponent } from './powers-view-child.component';
+import {PowersViewChildComponent} from './powers-view-child.component';
 
 describe('PowersComponent', () => {
   let component: PowersViewChildComponent;

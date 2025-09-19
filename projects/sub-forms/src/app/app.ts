@@ -1,7 +1,7 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {EventType, NavigationCancel, NavigationEnd, NavigationError, Router, RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {AccordionModule, CardModule, SegmentedControlComponent, SegmentItem} from '@kirbydesign/designsystem';
-import {first, skipWhile, tap} from 'rxjs';
+import {first, skipWhile} from 'rxjs';
 
 @Component({
   selector: 'app-root',

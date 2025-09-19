@@ -1,14 +1,7 @@
-import {Component, inject, OnInit, viewChild, ViewChild} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  NonNullableFormBuilder,
-  ReactiveFormsModule,
-  ValidatorFn,
-  Validators
-} from '@angular/forms';
+import {Component, inject} from '@angular/core';
+import {NonNullableFormBuilder, ReactiveFormsModule, ValidatorFn, Validators} from '@angular/forms';
 import {PowersFormComponent, PowerType} from './powers-component/powers-form.component';
-import {ButtonComponent, CardModule, ItemModule, SectionHeaderComponent} from '@kirbydesign/designsystem';
+import {CardModule, ItemModule, SectionHeaderComponent} from '@kirbydesign/designsystem';
 import {FormStateViewComponent} from '../../form-state-view-component/form-state-view-component';
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component, effect, inject, model, OnInit, output} from '@angular/core';
-import {FormControl, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, Validators} from '@angular/forms';
+import {NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {startWith} from 'rxjs';
 
 
@@ -24,11 +24,11 @@ export class PowersFormComponent implements OnInit {
   public valid = output<boolean>();
 
   constructor() {
-    effect(() => this.form.patchValue(this.value() ?? {}, {emitEvent: false}));
+    effect(() => this.form.patchValue(this.value(), {emitEvent: false}));
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(value => this.value.set(value));
+    this.form.valueChanges.subscribe(nextValue => this.value.set(nextValue));
     this.form.statusChanges.pipe(
       startWith(this.form.status)
     ).subscribe(value => this.valid.emit(value === 'VALID'));
