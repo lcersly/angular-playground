@@ -1,17 +1,19 @@
-<kirby-accordion>
-  <kirby-accordion-item title="Requirements">
-    <ul>
-      <li>Parents can send new data to a child</li>
-      <li>Children sends data to its parent when it changes</li>
-      <li>Children sends validity to its parent when it changes</li>
-      <li>Children handle validation that touches its own state</li>
-      <li>Parents (should) handle validation that involves state from several children</li>
-    </ul>
-  </kirby-accordion-item>
-
-</kirby-accordion>
 
 <div class="kirby-grid">
+  <div id="requirements" class="kirby-grid-item" data-xs="12">
+    <kirby-accordion>
+      <kirby-accordion-item title="Requirements">
+        <ul>
+          <li>Parents can send initial data to child (and update?)</li>
+          <li>Parent is notified about data and validity changes from children</li>
+          <li>Children handle validation that touches its own state</li>
+          <li>Parents (should) handle validation that involves state from different children</li>
+        </ul>
+      </kirby-accordion-item>
+
+    </kirby-accordion>
+  </div>
+
   <div class="kirby-grid-item" data-xs="12">
     <kirby-segmented-control [items]="navItems" [selectedIndex]="activeRouteIndex()"
                              (selectedIndexChange)="routeChangeClick($event)"/>

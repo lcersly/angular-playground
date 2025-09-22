@@ -16,6 +16,14 @@ export class App implements OnInit {
 
   navItems: SegmentItem[] = [
     {
+      text: "ControlValueAccessor",
+      id: "cva"
+    },
+    {
+      text: "Parent container injection",
+      id: "container-injection",
+    },
+    {
       text: "ViewChild",
       id: "viewChild"
     },
