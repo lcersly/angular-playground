@@ -2,6 +2,7 @@
   <h3>Value</h3>
   <pre>{{ form().value | json }}</pre>
 
+  <h3>Status</h3>
   <table>
     <tr>
       <th>Control</th>
@@ -17,30 +18,10 @@
       <tr>
         <td [style.padding-left]="item.level + 'em'">{{ item.name }}</td>
         <td>{{ item.item.status !== 'VALID' ? item.item.status : '' }}</td>
-        <td>
-          @if (item.item.dirty) {
-            <kirby-icon name="checkmark-selected"></kirby-icon>
-          }
-        </td>
-        <td>
-          @if (item.item.touched) {
-            <kirby-icon name="checkmark-selected"></kirby-icon>
-          }
-        </td>
-
-        <td>
-          @if (item.item.enabled) {
-            <kirby-icon name="checkmark-selected"></kirby-icon>
-          } @else {
-            <kirby-icon name="close"></kirby-icon>
-          }
-        </td>
-
-        <td>
-          @if (item.item.pristine) {
-            <kirby-icon name="checkmark-selected"></kirby-icon>
-          }
-        </td>
+        <ng-container *ngTemplateOutlet="checkmark; context: {value: item.item.dirty}"></ng-container>
+        <ng-container *ngTemplateOutlet="checkmark; context: {value: item.item.touched}"></ng-container>
+        <ng-container *ngTemplateOutlet="checkmarkOrCross; context: {value: item.item.enabled}"></ng-container>
+        <ng-container *ngTemplateOutlet="checkmark; context: {value: item.item.pristine}"></ng-container>
         @if (item.showValue && item.item.value) {
           <td>{{ item.item.value | json }}</td>
         } @else {
@@ -54,3 +35,21 @@
 
   <ng-content></ng-content>
 </kirby-card>
+
+<ng-template #checkmark let-value="value">
+  <td>
+    @if (!!value) {
+      <kirby-icon name="checkmark-selected"></kirby-icon>
+    }
+  </td>
+</ng-template>
+
+<ng-template #checkmarkOrCross let-value="value">
+  <td>
+    @if (!!value) {
+      <kirby-icon name="checkmark-selected"></kirby-icon>
+    } @else {
+      <kirby-icon name="close"></kirby-icon>
+    }
+  </td>
+</ng-template>

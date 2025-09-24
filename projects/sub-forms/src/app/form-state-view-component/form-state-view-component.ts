@@ -1,8 +1,8 @@
 import {Component, input, OnInit} from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, ControlEvent, FormArray, FormControl, FormGroup} from '@angular/forms';
 import {CardModule, IconModule} from '@kirbydesign/designsystem';
-import {startWith} from 'rxjs';
-import {JsonPipe} from '@angular/common';
+import {startWith, tap} from 'rxjs';
+import {JsonPipe, NgTemplateOutlet} from '@angular/common';
 
 
 export interface FormNode2 {
@@ -18,6 +18,7 @@ export interface FormNode2 {
     CardModule,
     JsonPipe,
     IconModule,
+    NgTemplateOutlet,
   ],
   templateUrl: './form-state-view-component.html',
   styleUrl: './form-state-view-component.scss'
