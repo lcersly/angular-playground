@@ -1,11 +1,20 @@
 import {Component, inject} from '@angular/core';
-import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AsyncValidatorFn,
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 
 export type PowerControlType = FormGroup<{
   power1: FormControl<string>;
   power2: FormControl<string>;
   power3: FormControl<string>
 }>
+
+const delayAsyncValidator: AsyncValidatorFn = () => new Promise(resolve => setTimeout(resolve, 1000, null));
 
 @Component({
   selector: 'app-powers-viewchild-component',
@@ -21,7 +30,7 @@ export class PowersViewChildComponent {
 
   form: PowerControlType = this.fb.group({
     power1: this.fb.control('', Validators.required),
-    power2: this.fb.control(''),
+    power2: this.fb.control('', null, delayAsyncValidator),
     power3: this.fb.control(''),
   })
 

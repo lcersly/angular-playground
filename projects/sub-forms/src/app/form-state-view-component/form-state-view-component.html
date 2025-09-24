@@ -1,25 +1,56 @@
-<kirby-card [hasPadding]="true">
-  <h4>Form value</h4>
+<kirby-card [hasPadding]="true" variant="outlined">
+  <h3>Value</h3>
   <pre>{{ form().value | json }}</pre>
 
-  <h4>Form state</h4>
   <table>
     <tr>
-      <td>Valid</td>
-      <td>{{ form().valid }}</td>
+      <th>Control</th>
+      <th>Status</th>
+      <th>Dirty</th>
+      <th>Touched</th>
+      <th>Enabled</th>
+      <th>Pristine</th>
+      <th>Value</th>
+      <th>Errors</th>
     </tr>
-    <tr>
-      <td>Touched</td>
-      <td>{{ form().touched }}</td>
-    </tr>
-    <tr>
-      <td>Dirty</td>
-      <td>{{ form().dirty }}</td>
-    </tr>
-  </table>
+    @for (item of dataSourceFlat; track item.name) {
+      <tr>
+        <td [style.padding-left]="item.level + 'em'">{{ item.name }}</td>
+        <td>{{ item.item.status !== 'VALID' ? item.item.status : '' }}</td>
+        <td>
+          @if (item.item.dirty) {
+            <kirby-icon name="checkmark-selected"></kirby-icon>
+          }
+        </td>
+        <td>
+          @if (item.item.touched) {
+            <kirby-icon name="checkmark-selected"></kirby-icon>
+          }
+        </td>
 
-  <h4>Recursive validation errors</h4>
-  <pre>{{ errors() | json }}</pre>
+        <td>
+          @if (item.item.enabled) {
+            <kirby-icon name="checkmark-selected"></kirby-icon>
+          } @else {
+            <kirby-icon name="close"></kirby-icon>
+          }
+        </td>
+
+        <td>
+          @if (item.item.pristine) {
+            <kirby-icon name="checkmark-selected"></kirby-icon>
+          }
+        </td>
+        @if (item.showValue && item.item.value) {
+          <td>{{ item.item.value | json }}</td>
+        } @else {
+          <td></td>
+        }
+        <td>{{ item.item.errors ? (item.item.errors | json) : '' }}</td>
+
+      </tr>
+    }
+  </table>
 
   <ng-content></ng-content>
 </kirby-card>

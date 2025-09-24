@@ -1,77 +1,59 @@
-import {Component, input} from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors} from '@angular/forms';
+import {Component, input, OnInit} from '@angular/core';
+import {AbstractControl, FormArray, FormControl, FormGroup} from '@angular/forms';
+import {CardModule, IconModule} from '@kirbydesign/designsystem';
+import {startWith} from 'rxjs';
 import {JsonPipe} from '@angular/common';
-import {CardModule} from '@kirbydesign/designsystem';
 
-export interface FieldError {
-  formGroupName: string;
-  fieldName: string;
-  errorCode: string;
+
+export interface FormNode2 {
+  name: string;
+  showValue: boolean;
+  item: AbstractControl;
+  level: number;
 }
 
 @Component({
   selector: 'app-form-state-view-component',
   imports: [
+    CardModule,
     JsonPipe,
-    CardModule
+    IconModule,
   ],
   templateUrl: './form-state-view-component.html',
   styleUrl: './form-state-view-component.scss'
 })
-export class FormStateViewComponent {
+export class FormStateViewComponent implements OnInit {
   form = input.required<AbstractControl>();
+  dataSourceFlat!: FormNode2[];
 
-  errors(){
-    const errors:FieldError[] = [];
-    this.getFormErrors(this.form(), "root", "", errors);
-    return errors;
+  ngOnInit(): void {
+    this.form().events.pipe(
+      startWith(null)
+    ).subscribe(() => {
+      this.dataSourceFlat = this.buildFormNode2(this.form(), "root");
+    });
   }
 
-  private getFormErrors(
-    control: AbstractControl,
-    formGroupName: string,
-    fieldName: string,
-    errors: FieldError[]) {
+  private buildFormNode2(control: AbstractControl, name: string, level = 0, data: FormNode2[] = []): FormNode2[] {
 
-    if (control instanceof FormGroup) {
-      const controlErrors: ValidationErrors | null = control.errors;
-      if (controlErrors) {
-        Object.keys(controlErrors).forEach(errorCode => {
-          errors.push({
-            formGroupName: formGroupName,
-            fieldName: fieldName,
-            errorCode: errorCode
-          })
-        });
-      }
+    const node: FormNode2 = {
+      name,
+      item: control,
+      level,
+      showValue: control instanceof FormControl
+    }
 
-      Object.keys(control.controls).forEach(controlName => {
-        let formControl = control.get(controlName);
-        if (formControl) {
-          let fGroupName = formGroupName + "." + controlName;
-          this.getFormErrors(formControl, fGroupName, controlName, errors);
-        }
+    data.push(node);
+
+    if (control instanceof FormGroup || control instanceof FormArray) {
+      Object.keys(control.controls).forEach(childControlName => {
+        let childControl = control.get(childControlName);
+        if (!childControl) return;
+
+        this.buildFormNode2(childControl, childControlName, level + 1, data);
       })
     }
 
-    if (control instanceof FormArray) {
-      control.controls.forEach((fControl: AbstractControl, index) => {
-        let fGroupName = formGroupName + "." + index;
-        this.getFormErrors(fControl, fGroupName, "Array", errors);
-      })
-    }
-
-    if (control instanceof FormControl) {
-      const controlErrors: ValidationErrors | null = control.errors;
-      if (controlErrors) {
-        Object.keys(controlErrors).forEach(errorCode => {
-          errors.push({
-            formGroupName: formGroupName,
-            fieldName: fieldName,
-            errorCode: errorCode
-          })
-        });
-      }
-    }
+    return data;
   }
 }
